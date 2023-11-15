@@ -9,8 +9,7 @@ public class Main {
         for (int i = 0; i < n; i++){
             int x = Integer.parseInt(br.readLine());
             if (x == 0){
-                Integer X = pq.poll();
-                System.out.println(X == null ? 0 : X);
+                System.out.println( pq.isEmpty() ? 0 : pq.poll());
             }else{
                 pq.add(x);
             }
