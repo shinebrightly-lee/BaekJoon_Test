@@ -10,20 +10,24 @@ public class Main {
             br.readLine();
             int[] a = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
             int[] b = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+            Arrays.sort(a);
             Arrays.sort(b);
 
             int cnt = 0;
-            for (int i = 0; i < a.length; i++){
-                for (int j = 0; j < b.length; j++){
-                    if (a[i] > b[j]){
-                        cnt++;
-                    }else{
-                        break;
+            int j = 0;
+            for (int i = 0; i < a.length; i++) {
+                    while (j < b.length) {
+                        if (a[i] > b[j] ) {
+                            j++;
+                        } else {
+                            break;
+                        }
                     }
-                }
+                    if (j >= b.length || b[j] >= a[i]){
+                        cnt += j;
+                    }
             }
             System.out.println(cnt);
         }
-
     }
 }
