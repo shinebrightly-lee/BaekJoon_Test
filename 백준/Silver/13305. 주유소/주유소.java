@@ -17,8 +17,8 @@ public class Main {
                 accumulate = 0;
                 bool = true;
             }else{
+                ans += accumulate == 0 ? city[i]*leng[i] : cur*leng[i];
                 accumulate += city[i]*leng[i];
-                ans += city[i]*leng[i];
                 bool = false;
             }
         }
