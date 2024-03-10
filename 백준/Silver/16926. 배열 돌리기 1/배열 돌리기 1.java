@@ -2,6 +2,11 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
+    static int mod(int a, int m){
+        int x = a%m;
+        if (x < 0) return x+m;
+        return x;
+    }
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -19,36 +24,35 @@ public class Main {
         }
 
         for (int i = 0; i < Math.min(n,m)/2; i++){
-            Deque<Integer> deq = new ArrayDeque<>();
+            List<Integer> list = new ArrayList<>();
 
             for (int j = i; j < n-1-i; j++){
-                deq.add(arr[j][i]);
+                list.add(arr[j][i]);
             }
             for (int j = i; j < m-1-i; j++){
-                deq.add(arr[n-1-i][j]);
+                list.add(arr[n-1-i][j]);
             }
             for (int j = n-1-i; j > i; j--){
-                deq.add(arr[j][m-1-i]);
+                list.add(arr[j][m-1-i]);
             }
             for (int j = m-1-i; j > i; j--){
-                deq.add(arr[i][j]);
+                list.add(arr[i][j]);
             }
-
-            for (int j = 0; j < r; j++ ){
-                deq.addFirst(deq.pollLast());
-            }
-
+            
+            int leng = list.size();
+            int idx = -r;
+            
             for (int j = i; j < n-1-i; j++){
-                arr[j][i] = deq.pollFirst();
+                arr[j][i] = list.get(mod(idx++, leng));
             }
             for (int j = i; j < m-1-i; j++){
-                arr[n-1-i][j] = deq.pollFirst();
+                arr[n-1-i][j] = list.get(mod(idx++, leng));
             }
             for (int j = n-1-i; j > i; j--){
-                arr[j][m-1-i] = deq.pollFirst();
+                arr[j][m-1-i] = list.get(mod(idx++, leng));
             }
             for (int j = m-1-i; j > i; j--){
-                arr[i][j] = deq.pollFirst();
+                arr[i][j] = list.get(mod(idx++, leng));
             }
         }
 
